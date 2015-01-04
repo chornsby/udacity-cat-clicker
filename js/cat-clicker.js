@@ -48,10 +48,23 @@ $(function() {
             model.init();
             selectionView.init();
             catView.init();
+            adminView.init();
         },
 
         getCurrentCat: function() {
             return model.currentCat;
+        },
+
+        updateCurrentCat: function(name, imgSrc, clickCount) {
+            var cat = this.getCurrentCat();
+
+            cat.name = name;
+            cat.imgSrc = imgSrc;
+            cat.imgAttribution = '';
+            cat.clickCount = clickCount;
+
+            selectionView.render();
+            catView.render();
         },
 
         getCats: function() {
@@ -119,6 +132,70 @@ $(function() {
                 })(cat));
                 this.$catList.append(listElement);
             }
+        }
+    };
+
+    var adminView = {
+
+        init: function() {
+            this.$adminButton = $('#admin-button');
+            this.$adminForm = $('#admin-form');
+            this.$saveButton = $('#save');
+            this.$cancelButton = $('#cancel');
+
+            this.$nameInput = $('#name');
+            this.$imgSrcInput = $('#imgSrc');
+            this.$clickCountInput = $('#clickCount');
+
+            this.attachEventListeners();
+        },
+
+        attachEventListeners: function() {
+            var thisView = this;
+
+            this.$adminButton.click(function() {
+                thisView.showForm();
+            });
+
+            this.$cancelButton.click(function() {
+                thisView.hideForm();
+            });
+
+            this.$saveButton.click(function() {
+                thisView.saveForm();
+            });
+        },
+
+        hideForm: function() {
+            this.$adminForm.addClass('hidden');
+            this.clearForm();
+        },
+
+        showForm: function() {
+            this.populateForm();
+            this.$adminForm.removeClass('hidden');
+        },
+
+        clearForm: function() {
+            this.$nameInput.val('');
+            this.$imgSrcInput.val('');
+            this.$clickCountInput.val('');
+        },
+
+        saveForm: function() {
+            var name = this.$nameInput.val(),
+                imgSrc = this.$imgSrcInput.val(),
+                clickCount = this.$clickCountInput.val();
+            this.hideForm();
+            controller.updateCurrentCat(name, imgSrc, clickCount);
+        },
+
+        populateForm: function() {
+            var cat = controller.getCurrentCat();
+
+            this.$nameInput.val(cat.name);
+            this.$imgSrcInput.val(cat.imgSrc);
+            this.$clickCountInput.val(cat.clickCount);
         }
     };
 

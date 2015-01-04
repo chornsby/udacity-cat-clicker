@@ -7,21 +7,55 @@
     <link href="css/bootstrap-theme.min.css" rel="stylesheet">
 </head>
 <body>
-    <div class="container text-center">
+    <div class="container">
 
-        <div class="row">
-            <div class="col-md-12">
+        <div class="row text-center">
+            <div class="col-sm-12">
                 <h1 class="title">Cat Clicker</h1>
             </div>
         </div>
 
-        <div class="row">
+        <div class="row text-center">
             <div class="col-sm-3">
                 <ul id="cat-list" class="list-group"></ul>
             </div>
             <div class="col-sm-9">
                 <h2><span id="cat-name"></span>: <span id="click-counter"></span></h2>
                 <img width="100%" id="cat-image" alt="adorable kitten">
+            </div>
+        </div>
+
+
+        <div class="row">
+            <div class="col-sm-12">
+                <br>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-sm-3">
+                <button id="admin-button" class="btn btn-primary">Admin</button>
+            </div>
+            <div class="col-sm-9">
+                <form id="admin-form" class="hidden">
+                    <div class="form-group">
+                        <label for="name">Name</label>
+                        <input id="name" class="form-control">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="imgSrc">Image Url</label>
+                        <input id="imgSrc" class="form-control">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="clickCount">Clicks</label>
+                        <input id="clickCount" class="form-control" type="number">
+                    </div>
+
+                    <input id="save" class="btn btn-success" value="Save">
+                    <input id="cancel" class="btn btn-danger" value="Cancel">
+                </form>
             </div>
         </div>
 
